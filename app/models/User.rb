@@ -37,13 +37,12 @@ class User
 
   def top_three_recipes
     # should return the top three highest rated recipes for this user.
-    sorted_intances = my_recipe.sort_by {|rc| rc.rating}.reverse
-    sorted_intances.map {|rc| rc.recipe.name}.slice(0, 3)
+    my_recipe.sort_by {|rc| -rc.rating}.slice(0, 3)
   end
 
   def most_recent_recipes
     # should return the recipe most recently added to the user's cookbook.
-    my_recipe.pop
+    my_recipe.last
   end
 
   def safe_recipes

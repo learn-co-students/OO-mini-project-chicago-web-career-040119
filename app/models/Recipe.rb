@@ -12,7 +12,8 @@ class Recipe
 
   def users
     # should return the user instances who have recipe cards with this recipe
-    RecipeCard.all.select {|rc| rc.user == self}
+    recipe_cards = RecipeCard.all.select {|rc| rc.recipe == self}
+    recipe_cards.map {|rc| rc.user}
   end
 
 
@@ -47,7 +48,7 @@ class Recipe
     #Recipe.most_popular should return the recipe instance with the highest number of users (the recipe that has the most recipe cards)
     names = RecipeCard.all.map {|rc| rc.recipe.name}
     single_name = names.sort_by {|name| names.count(name)}.reverse[0]
-    self.all.select {|instance| instance.name == single_name }
+    self.all.find {|instance| instance.name == single_name }
   end
 
 
